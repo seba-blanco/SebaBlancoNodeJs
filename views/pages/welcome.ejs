@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    
+</head>
+<body class="container">
+    
+    <header>
+        <%- include('../partials/headers'); %>
+    </header>
+    
+    <!-- <main> -->
+        <div class="">
+            <p><b>gracias por tu pedido: <%= UserLogged.firstName %> <%= UserLogged.lastName %></b></p> 
+            <div id="divUser">
+
+            </div>
+        
+        </div>
+
+        <div>
+          
+          <h3>tu pedido</h3>  
+
+          <% Carrito.prods.forEach(function(prod) { %>
+
+                <div className='d-flex d-row'>
+                                                        
+                    <div>
+                        <span className="title">Nombre:<%= prod.name %></span>
+                        
+                        <p><b>Price: <%= prod.price %></b></p> 
+                        
+                    </div>
+                            
+                </div>   
+                <% }); %>  
+            
+            
+            
+
+        </div>
+
+        
+    <!-- </main> -->
+    <%- include('../partials/footers'); %>
+
+    <script src="./main.js"></script>
+ 
+</body>
+</html>
