@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session')
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
-const log4js = require("log4js");
+
 
 const parseArgs = require('minimist');
 const options = {default:{PORT:8080, SERVER_MODE:'FORK'}};
@@ -17,6 +17,9 @@ const {passport} = require('./src/config/passport-config');
 
 const randomRouter = require('./src/routes/RandomRouter');
 
+//TO DO: BORRAR
+const prodRouter = require('./src/routes/ProductRouter');
+
 const { EXPIRATION_TIME } = require('./src/config/global')
 const {productsDAO, chatsDAO} = require("./src/DAOS/defaultDaos");
 
@@ -24,7 +27,6 @@ const path = require('path')
 const app = express();
 const httpServer = new HttpServer(app);
 
-let moment = require('moment'); 
 
 
 app.use(session({
@@ -39,20 +41,7 @@ app.use(session({
     saveUninitialized: true
 }))
 
-//seteo el logger.
-log4js.configure({
-    appenders: {
-      miLoggerConsole2: { type: "console" },
-      errorConsole: { type: "console" },
-      warnFile: {type:'file', filename: 'warn.log'},
-      errorFile: {type:'file', filename: 'error.log'},
-    },
-    categories: {
-      default: { appenders: ['miLoggerConsole2'], level: "info" },
-      warn: { appenders: ['miLoggerConsole2','warnFile'], level: "warn" },
-      error: { appenders: ['errorConsole','errorFile'], level: "error" },
-    },
-  });
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -61,6 +50,7 @@ app.use(passport.session())
 
 app.use("/", loginRouter);
 app.use("/api/", randomRouter);
+app.use("/api/productos", prodRouter);
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
