@@ -1,35 +1,36 @@
 let { DEFAULTSTORE } = require('../config/global')
-const {ProductsDAOFirestore} =  require('../DAOS/products/ProductsDAOFirestore');
+
 const {ProductsDAOFile} =  require('../DAOS/products/ProductsDAOFile');
 const {ProductsDAOMongo} =  require('../DAOS/products/ProductsDAOMongo');
 
-const {CartsDAOFirestore} =  require('../DAOS/carts/cartsDAOFirestore');
 const {cartsDAOFile} =  require('../DAOS/carts/cartsDAOFile');
 const {CartsDAOMongo} =  require('../DAOS/carts/cartsDAOMongo');
 
 const {UsersDAOMongo} = require('../DAOS/users/UsersDAOMongo');
 
+const {ChatsDAOMongo} = require('../DAOS/chats/ChatsDAOMongo');
+const {ChatsDAOFile} = require('../DAOS/chats/ChatsDAOFile');
+
 let productsDAO;
 let cartsDAO;
 let usersDAO;
+let chatsDAO;
 
 switch (DEFAULTSTORE) {
     case 'MongoDB':
         cartsDAO = new CartsDAOMongo();
         productsDAO = new ProductsDAOMongo();
         usersDAO = new UsersDAOMongo();
+        chatsDAO = new ChatsDAOMongo();
         break;
    
-    case 'Firestore':
-        cartsDAO = new CartsDAOFirestore();
-        productsDAO = new ProductsDAOFirestore();
-        break;
-        
+       
     default:
         cartsDAO = new cartsDAOFile();
         productsDAO = new ProductsDAOFile();
         usersDAO = new UsersDAOMongo();
+        chatsDAO = new ChatsDAOFile();
         break;
 }
 
-module.exports ={productsDAO, cartsDAO, usersDAO}
+module.exports ={productsDAO, cartsDAO, usersDAO, chatsDAO}

@@ -10,10 +10,16 @@ const options = {default:{PORT:8080, SERVER_MODE:'FORK'}};
 const args = parseArgs(process.argv.slice(2), options);//parseArgs[, options];
 
 const { Server: HttpServer } = require('http');
+const { Server: IOServer } = require('socket.io')
 
+const path = require('path')
+const app = express();
+const httpServer = new HttpServer(app);
+const io = new IOServer(httpServer);
 
-
-
+io.on('connection', async socket => {
+    SocketManager(socket, io);
+});
 
 //TO DO: BORRAR
 const {loginRouter} = require('./src/routes/logInRouter');
@@ -23,12 +29,7 @@ const prodRouter = require('./src/routes/ProductRouter');
 const cartRouter = require('./src/routes/CartRouter');
 
 const { EXPIRATION_TIME } = require('./src/config/global')
-const {productsDAO, chatsDAO, cartDAO} = require("./src/DAOS/defaultDaos");
-
-const path = require('path')
-const app = express();
-const httpServer = new HttpServer(app);
-
+const {SocketManager} = require('./src/routes/IORouter');
 
 
 app.use(session({
