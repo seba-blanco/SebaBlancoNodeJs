@@ -14,12 +14,15 @@ const { Server: IOServer } = require('socket.io')
 
 const path = require('path')
 const app = express();
+app.use(express.static('./public'));
+
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer);
 
 io.on('connection', async socket => {
     SocketManager(socket, io);
 });
+
 
 //TO DO: BORRAR
 const {loginRouter} = require('./src/routes/logInRouter');
@@ -37,7 +40,7 @@ app.use(session({
     cookie: {
         httpOnly: false,
         secure: false,
-        maxAge: parseInt(EXPIRATION_TIME)
+        maxAge: EXPIRATION_TIME
     },
     rolling: true,
     resave: true,

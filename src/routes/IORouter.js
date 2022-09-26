@@ -1,18 +1,24 @@
+const util = require('util')
 const {chatsDAO} = require("../DAOS/defaultDaos");
-const productService  = require ("../services/productService")
+const productService  = require ("../services/productService");
+const {normalizeChat} = require('../utils/chatNormalizr');
+let moment = require('moment'); 
+
 
 async function SocketManager (socket, io) {
     
-        console.log('Cliente conectado');
-        let allProds = productService.getAllProd();
+        socket.on('showData', async (data)=> {
+            console.log('Cliente conectado');
+            let allProds = await productService.getAllProd();
 
-        let allMessages = await chatsDAO.getAll();
-        const dataContainer = {id:1, posts:[]};
-        dataContainer.posts = allMessages;
+            console.log(allProds);
 
-        console.log(util.inspect(normalizeChat(dataContainer),true, 10, true) );
+            let allMessages = await chatsDAO.getAll();
+            
+            socket.emit('welcome', {products:allProds, chat: allMessages});
+
+        });
         
-        socket.emit('welcome', {products:allProds, chat: allMessages});
     
 
         socket.on('newProduct', async (data) => {

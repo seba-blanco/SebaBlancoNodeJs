@@ -10,15 +10,15 @@ socket.on('welcome', data => {
 
 });
 
-
+socket.emit('showData');
 
 function renderProductos(data) {
     
     const html = data.map((elem, index) => {
         return(`<tr>
-            <td>${elem.title}</td>
+            <td>${elem.name}</td>
             <td>${elem.price}</td>
-            <td><img width=100px height=100px src='${elem.thumbnails}'></img></td>
+            <td><img width=100px height=100px src='${elem.photo}'></img></td>
         </tr>`)
     }).join(" ");
     document.getElementById('tableProd').getElementsByTagName('tbody')[0].innerHTML = html;
