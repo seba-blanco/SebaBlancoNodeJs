@@ -47,9 +47,6 @@ class cartsDAOFile extends FileContainer {
         
         carrito[cartIndex] = newData[0];
 
-        console.log("el muevo carrito");
-        console.log(carrito);
-        
         this.save(carrito);
     }
 

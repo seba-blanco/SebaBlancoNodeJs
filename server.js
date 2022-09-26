@@ -12,16 +12,18 @@ const args = parseArgs(process.argv.slice(2), options);//parseArgs[, options];
 const { Server: HttpServer } = require('http');
 
 
-const {loginRouter} = require('./src/routes/logInRouter');
-const {passport} = require('./src/config/passport-config');
 
-const randomRouter = require('./src/routes/RandomRouter');
+
 
 //TO DO: BORRAR
+const {loginRouter} = require('./src/routes/logInRouter');
+const randomRouter = require('./src/routes/RandomRouter');
+const {passport} = require('./src/config/passport-config');
 const prodRouter = require('./src/routes/ProductRouter');
+const cartRouter = require('./src/routes/CartRouter');
 
 const { EXPIRATION_TIME } = require('./src/config/global')
-const {productsDAO, chatsDAO} = require("./src/DAOS/defaultDaos");
+const {productsDAO, chatsDAO, cartDAO} = require("./src/DAOS/defaultDaos");
 
 const path = require('path')
 const app = express();
@@ -51,6 +53,7 @@ app.use(passport.session())
 app.use("/", loginRouter);
 app.use("/api/", randomRouter);
 app.use("/api/productos", prodRouter);
+app.use("/api/carrito", cartRouter);
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');

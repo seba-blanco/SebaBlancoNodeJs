@@ -4,12 +4,12 @@ const getProducts = async (req,res) => {
     try {
         let id = req.params.id;
         
-        if(id) {
-            let prods = await productService.getAllProd(id);
-            prods
-                ? res.status(200).json(products)
-                : res.status(404).json({"error": "product/s not found/s"})
-        }
+      
+        let prods = await productService.getAllProd(id);
+        prods
+            ? res.status(200).json(prods)
+            : res.status(404).json({"error": "product/s not found/s"})
+        
     }
     catch (err) {
         res.json({

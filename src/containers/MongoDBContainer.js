@@ -30,7 +30,7 @@ class MongoDBContainer {
    }
 
    delete = async (id) => {
-       await this.model.deleteOne({id: id})
+    await this.model.deleteOne({id: id})
    }
 
    save = async (prod, id) => {

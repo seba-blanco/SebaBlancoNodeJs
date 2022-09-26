@@ -11,7 +11,9 @@ class ProductRepository {
     };
       
     getAllProd = async () => {
-        return await productsDAO.getAll().map(prod => productDTO(prod));
+        let prods = await productsDAO.getAll();
+        let prodsDTO = prods.map(prod => productDTO(prod));
+        return prodsDTO;
     };
       
       
