@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="index.js"></script>
 </head>
 <body class="container">
     
@@ -11,8 +12,10 @@
     
     <!-- <main> -->
         <div class="">
-            <h1>entrega 6</h1>
+            <h1>Proyecto final</h1>
+             
             <p><b>Bienveido: <%= UserLogged %></b></p> 
+            
             <div id="divUser">
 
             </div>
@@ -24,15 +27,19 @@
             
         </div>
         <div>
-           
+           <br>
+           <br>
             <div id="lstProducts">
-                <h1>products</h1>
+                <h2 style="color:blue">products</h2>
                 <table id="tableProd" class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Title</th>
+                        <th scope="col">name</th>
+                        <th scope="col">description</th>
                         <th scope="col">Price</th>
                         <th scope="col">Image</th>
+                        <th scope="col">stock</th>
+                        <th scope="col">carrito</th>
                       </tr>
                     </thead>
                     <tbody id="productBody">
@@ -60,7 +67,7 @@
     <!-- </main> -->
     <%- include('../partials/footers'); %>
 
-    <script src="index.js"></script>
+    
  
 </body>
 </html>

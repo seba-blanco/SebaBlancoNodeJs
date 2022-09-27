@@ -6,7 +6,7 @@ const chatSchema = new mongoose.Schema({
     id: {type: Number, required: true},
     email: {type: String, required: true, max: 200},
     tipo: {type: String, required: true},
-    datetime: {type: string, required: true},
+    datetime: {type: String, required: true},
     message: {type: String, required: true}
 })
 

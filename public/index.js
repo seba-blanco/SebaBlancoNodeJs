@@ -17,8 +17,11 @@ function renderProductos(data) {
     const html = data.map((elem, index) => {
         return(`<tr>
             <td>${elem.name}</td>
+            <td>${elem.description}</td>
+            <td>${elem.price}</td>
             <td>${elem.price}</td>
             <td><img width=100px height=100px src='${elem.photo}'></img></td>
+            <td><input type="submit" id=${elem.id} value="addToCart" onclick="addToCart(this.id)"></td>
         </tr>`)
     }).join(" ");
     document.getElementById('tableProd').getElementsByTagName('tbody')[0].innerHTML = html;
@@ -26,14 +29,31 @@ function renderProductos(data) {
     
 }
 
+function addToCart(id){
+    const Data = {
+        id: id
+    }
+    fetch('/api/carrito/productos/' + id, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: "POST",
+        body: JSON.stringify(Data)
+    })
+        .then(res => alert('producto agregado') )
+        .catch(err => console.log(res) )
+    
+  }
 
 function renderChat(data) {
     if (data.length> 0) { 
     const html = data.map((elem, index) => {
         return(`<div>
-            <strong style='color:blue;'>${elem.author.mail}</strong>:
-            <span style='color:brown;'>[${elem.message.datetime}]</span>
-            <i style='color:green;'>${elem.message.message}</i>
+            <strong style='color:blue;'>${elem.email}</strong>:
+            <span style='color:black;'>[${elem.tipo}]</span>
+            <span style='color:brown;'>[${elem.datetime}]</span>
+            <i style='color:green;'>${elem.message}</i>
         </div>`)
     }).join(" ");
 
@@ -44,9 +64,11 @@ function renderChat(data) {
 function addProduct(e) {
     
     const data = {
-        title: document.getElementById('title').value,
+        name: document.getElementById('name').value,
+        description: document.getElementById('description').value,
         price: document.getElementById('price').value,
-        thumbnails: document.getElementById('thumbnails').value
+        stock: document.getElementById('stock').value,
+        photo: document.getElementById('photo').value
     };
     
     socket.emit('newProduct',data);
@@ -56,17 +78,11 @@ function addProduct(e) {
 
 function addChatMessage(e) {
    
-    const chatMsg = {author: {
-        mail: document.getElementById('mail').value,
-        nombre: document.getElementById('nombre').value,
-        apellido: document.getElementById('apellido').value,
-        edad: document.getElementById('edad').value,
-        alias: document.getElementById('alias').value,
-        avatar: document.getElementById('avatar').value
-        },
-        message: {
+    const chatMsg = {
+            email: document.getElementById('email').value,
+            tipo: document.getElementById('tipo').value,
             message: document.getElementById('message').value
-        }
+        
     };
    
     socket.emit('newMessage', chatMsg);

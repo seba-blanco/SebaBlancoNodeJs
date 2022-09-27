@@ -26,7 +26,7 @@ class cartRepository {
       
         
     updateCart  = async (prod, id) => {
-        return await cartsDAO.update(prod, id);
+       return await cartsDAO.update(id,prod );
     };
         
       
@@ -39,7 +39,7 @@ class cartRepository {
     }
 
     getCartForUser = async (id) =>{
-        await cartsDAO.getCartForUser(id);
+       return await cartsDAO.getCartForUser(id);
     }
 
 }

@@ -13,7 +13,7 @@ class ChatsDAOMongo extends MongoDBContainer{
 
     if(chat.length > 0) {
 
-      this.id = parseInt(Math.max(...chat.map(prod => prod.id), 0)) + 1
+      this.id = parseInt(Math.max(...chat.map(msj => msj.id), 0)) + 1
     }
   }
   

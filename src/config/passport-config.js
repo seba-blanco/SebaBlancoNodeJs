@@ -49,6 +49,8 @@ passport.use('signup', new LocalStrategy(
                 lastName: req.body.lastname,
                 email: req.body.email,
                 username: username,
+                address:req.body.address,
+                age:req.body.age,
                 password: createHash(password)
             }
 

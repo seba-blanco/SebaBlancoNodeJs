@@ -7,7 +7,7 @@ class ProductRepository {
     }
 
     addProd = async (prod) => {
-        return await productsDAO.save(productDTO(prod));
+        return await productsDAO.saveProduct(productDTO(prod));
     };
       
     getAllProd = async () => {

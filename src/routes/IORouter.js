@@ -1,17 +1,14 @@
 const util = require('util')
 const {chatsDAO} = require("../DAOS/defaultDaos");
 const productService  = require ("../services/productService");
-const {normalizeChat} = require('../utils/chatNormalizr');
+const cartService  = require ("../services/cartService");
 let moment = require('moment'); 
 
 
 async function SocketManager (socket, io) {
     
         socket.on('showData', async (data)=> {
-            console.log('Cliente conectado');
             let allProds = await productService.getAllProd();
-
-            console.log(allProds);
 
             let allMessages = await chatsDAO.getAll();
             
@@ -30,18 +27,19 @@ async function SocketManager (socket, io) {
 
         socket.on('newMessage', async (data) => {
         
-            data.message['tiemstamp'] = moment(new Date()).format("DD/MM/YYYY HH:mm:ss");
-            console.log("nuevo mensaje");
-            console.log(data);
-            await chatsDAO.save(data);
+            data['datetime'] = moment(new Date()).format("DD/MM/YYYY HH:mm:ss");
+            await chatsDAO.saveChat(data);
             
         
             let allMessages = await chatsDAO.getAll();
-            console.log("al messages");
-            console.log(allMessages);
             
             io.sockets.emit('chatMessages', {chat:allMessages});
         })
+
+        socket.on('addProdToCart', async (id) => {
+
+            await cartService.updateCart(id);
+        });
     
 }
 

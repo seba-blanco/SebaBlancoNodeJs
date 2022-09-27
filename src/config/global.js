@@ -4,7 +4,7 @@ module.exports = {
   MONGO_URI: process.env.MONGO_URI || '',
   FIRESTORE_FILE: process.env.FIRESTORE_FILE || '',
   DEFAULTSTORE:process.env.DEFAULTSTORE,
-  EXPIRATION_TIME: process.env.EXPIRATION_TIME || 30000,
+  EXPIRATION_TIME: process.env.EXPIRATION_TIME || 600000,
   MAILADMIN:process.env.MAILADMIN,
   MAILFROM:process.env.MAILFROM,
   WHATSFROM:process.env.WHATSFROM,

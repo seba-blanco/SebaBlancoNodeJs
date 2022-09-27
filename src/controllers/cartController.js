@@ -86,6 +86,23 @@ const deleteProdInCart = async(req, res) => {
     }
 }
 
+const AddProdToCart = async (req, res) => {
+    try {
+        console.log('llegue al add prod to cary');
+        let userId = req.user.id;
+        const prodAdded = await cartService.AddProdToCart(userId, req.body.id);
+        prodAdded
+            ? res.status(200).json(prodAdded)
+            : res.status(204).json({"error": "something went wrong"})
+    }
+    catch (err) {
+        res.status(400).json({
+            msj:"failed to add prod to cart ",
+            error: err.message
+        }) 
+    }
+}
+
 const getCartForUser = async (req, res) => {
     try {
         const id = req.params.id;
@@ -112,4 +129,5 @@ module.exports = {getCarts
             ,deleteCart
             ,getCartForUser
             ,deleteProdInCart
+            ,AddProdToCart
             }
