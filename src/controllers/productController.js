@@ -8,9 +8,10 @@ const getProducts = async (req,res) => {
         
       
         let prods = await productService.getAllProd(id);
-        prods
-            ? res.status(200).json(prods)
-            : res.status(404).json({"error": "product/s not found/s"})
+       if (prods.length> 0)
+            res.status(200).json(prods)
+        else
+            res.status(404).json({"error": "product/s not found/s"})
         
     }
     catch (err) {
