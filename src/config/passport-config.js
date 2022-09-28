@@ -4,6 +4,7 @@ const {validatePass} = require('../../src/utils/passValidator');
 const {createHash} = require('../../src/utils/hashGenerator')
 const usersDB = require("../models/Users");
 const passport = require("passport");
+const {sendNewUserMail} = require('../utils/mailManager');
 
 passport.use('login', new LocalStrategy(
     (username, password, callback) => {
@@ -13,12 +14,10 @@ passport.use('login', new LocalStrategy(
             }
 
             if (!user) {
-                console.log('No se encontro usuario');
                 return callback(null, false)
             }
 
             if(!validatePass(user, password)) {
-                console.log('Invalid Password');
                 return callback(null, false)
             }
 
@@ -33,16 +32,12 @@ passport.use('signup', new LocalStrategy(
     {passReqToCallback: true}, (req, username, password, callback) => {
         usersDB.findOne({ username: username }, (err, user) => {
             if (err) {
-                console.log('Hay un error al registrarse');
                 return callback(err)
             }
 
             if (user) {
-                console.log('El usuario ya existe');
-                return callback(null, false)
+               return callback(null, false)
             }
-
-            console.log(req.body);
 
             const newUser = {
                 firstName: req.body.firstname,
@@ -51,20 +46,16 @@ passport.use('signup', new LocalStrategy(
                 username: username,
                 address:req.body.address,
                 age:req.body.age,
+                cellphone:req.body.cellphone,
                 password: createHash(password)
             }
 
-            console.log(newUser);
-
-
             usersDB.create(newUser, (err, userWithId) => {
                 if (err) {
-                    console.log('Hay un error al registrarse');
                     return callback(err)
                 }
 
-                console.log(userWithId);
-                console.log('Registro de usuario satisfactoria');
+                sendNewUserMail(newUser);
 
                 return callback(null, userWithId)
             })

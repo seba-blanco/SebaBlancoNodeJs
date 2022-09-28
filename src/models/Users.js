@@ -5,7 +5,7 @@ const { MONGO_URI } = require('../config/global')
 mongoose.connect(MONGO_URI, {
   useNewUrlParser:true,
   useUnifiedTopology:true
-  }, () => console.log(' mongo Connected'))
+  }, () => (console.log(' mongo Connected')))
 
 const usersCollecion = 'users';
 

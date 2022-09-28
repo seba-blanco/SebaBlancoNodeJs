@@ -4,7 +4,6 @@ function ValidateLogin(req,res,next) {
         next();
     }
     else {
-        console.log('no logueado');
         res.redirect('/login');
     }
 

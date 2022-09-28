@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <script src="/socket.io/socket.io.js"></script> -->
     
+    <script src="./index.js"></script>
 </head>
 <body class="container">
     
@@ -12,7 +12,7 @@
     
     <!-- <main> -->
         <div class="">
-            <p><b>gracias por tu pedido: <%= UserLogged.firstName %> <%= UserLogged.lastName %></b></p> 
+            <p><b>este va a ser tu pedido: <%= UserLogged.firstName %> <%= UserLogged.lastName %></b></p> 
             <div id="divUser">
 
             </div>
@@ -31,7 +31,10 @@
                         <span className="title">Nombre:<%= prod.name %></span>
                         
                         <p><b>Price: <%= prod.price %></b></p> 
-                        
+
+                        <p><b>description: <%= prod.description %></b></p> 
+
+                        <p><b>cantidad: <%= prod.stock %></b></p> 
                     </div>
                             
                 </div>   
@@ -41,12 +44,17 @@
             
 
         </div>
+        <form action="/api/orders/" method="POST">
+            <input type="submit" value="comprar">
 
+        </form>
+        <!-- <input type="submit" value="comprar" onclick="finalizarCarrito('<%= Carrito.id %>')"> -->
+
+        
         
     <!-- </main> -->
     <%- include('../partials/footers'); %>
 
-    <script src="./main.js"></script>
- 
+    
 </body>
 </html>

@@ -51,7 +51,7 @@ class cartsDAOFile extends FileContainer {
     }
 
     getById =async (id) => {
-        console.log("entre al get by id")
+        
         let datos = await this.readFile().then (prods=> {return prods});
 
         return datos.filter(x=> x.id == id)[0];

@@ -6,7 +6,6 @@ const numCPUs = require("os").cpus().length;
 const log4js = require('log4js');
 const { Router } = require("express");
 const { passport } = require('../config/passport-config'); 
-const {ValidateLogin} = require('../middlewares/securityMiddleware')
 const loginRouter = Router();
 
 
@@ -44,7 +43,6 @@ function getLogin(req, res) {
 }
 
 function getSignup(req, res) {
-    console.log('entre al signup')
     res.render('pages/Signup');
 }
 
@@ -73,16 +71,6 @@ function getProfile (req, res) {
     }
 }
 
-function getFaillogin (req, res) {
-    console.log('error en login');
-    res.render('login-error', {});
-}
-
-function getFailsignup (req, res) {
-    console.log('error en signup');
-    res.render('signup-error', {});
-}
-
 function getLogout (req, res) {
     req.logout( (err) => {
         if (!err) {
@@ -91,16 +79,11 @@ function getLogout (req, res) {
     });
 }
 
-function failRoute(req, res){
-    res.status(404).render('routing-error', {});
-}
-
 function checkAuthentication(req, res, next) {
     if (req.isAuthenticated()) {
         next();
     }
     else {
-        console.log('no logueado');
         res.redirect('/login');
     }
 }

@@ -1,14 +1,14 @@
 const NM = require('nodemailer');
-const { MAILADMIN, MAILFROM } = require('../config/global')
-const log4ejs = require('log4js');
+const { MAILADMIN, MAILFROM, MAIL_USER, MAIL_PASS } = require('../config/global')
+const {logger} = require('../utils/logger4');
 
 
 const transporter = NM.createTransport({
-    host: 'smtp.ethereal.email',
+    host: 'smtp.gmail.com',
     port: 587,
     auth: {
-        user: 'rahsaan.harris35@ethereal.email',
-        pass: 'pWAAjyRmGtsmRZHKcJ'
+        user: MAIL_USER,
+        pass: MAIL_PASS
     }
 });
 
@@ -22,25 +22,23 @@ sendMail  = async (subject, emailTO, mailBody ) => {
         };
 
         const info = await transporter.sendMail(mailOptions);
-        console.log(info);
+        
     }
     catch(err) {
-        console.log(err);
+        logger.error(err);
     }
 }
-sendNewOperationMail = async (user, prods) => {
+sendNewOperationMail = async (order) => {
     
-    let subject=`nuevo pedido de: ${user.username}`;
+    let subject=`nuevo pedido de: ${order.user}`;
         
-    let data = prods.map((elem, index) => {
-        return (`<p><b>producto: ${elem.name}</b></p>`)
+    let data = order.prods.map((elem, index) => {
+        return (`<p><b>producto: ${elem.name}</b></p>
+                 <p><b>precio: ${elem.price}</b></p>
+                 <p><b>cantidad: ${elem.stock}</b></p>`)
     });
 
-    console.log(subject);
-    console.log(data);
-
-
-    await sendMail(subject, MAILADMIN, data.toString());
+    await sendMail(subject, order.userEmail, data.toString());
  
 }
 sendNewUserMail =async (newUser) => {

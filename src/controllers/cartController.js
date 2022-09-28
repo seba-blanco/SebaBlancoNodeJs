@@ -88,7 +88,6 @@ const deleteProdInCart = async(req, res) => {
 
 const AddProdToCart = async (req, res) => {
     try {
-        console.log('llegue al add prod to cary');
         let userId = req.user.id;
         const prodAdded = await cartService.AddProdToCart(userId, req.body.id);
         prodAdded
@@ -105,11 +104,30 @@ const AddProdToCart = async (req, res) => {
 
 const getCartForUser = async (req, res) => {
     try {
-        const id = req.params.id;
+
+        const id = req.user.id;
         const cart = await cartService.getCartForUser(id);
+        
         cart
             ? res.status(200).json(cart)
             : res.status(204).json({"error": "cart for user not found"})
+
+    }
+    catch(err) {
+        res.status(400).json({
+            msj:"failed to get cart for user ",
+            error: err.message
+        })  
+    }
+}
+    
+ const viewCartForUser = async (req, res) => {
+    try {
+
+        const id = req.user.id;
+        const cart = await cartService.getCartForUser(id);
+        
+        res.render('pages/cart', {UserLogged: req.user.firstName, Carrito:cart});  
 
     }
     catch(err) {
@@ -130,4 +148,5 @@ module.exports = {getCarts
             ,getCartForUser
             ,deleteProdInCart
             ,AddProdToCart
+            ,viewCartForUser
             }

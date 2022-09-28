@@ -58,7 +58,7 @@ const deleteProdInCart = async(id, id_prod)=> {
 
 const getCartForUser = async(id)=> {
     try {
-     await cartRepository.getCartForUser(id); 
+      return  await cartRepository.getCartForUser(id); 
     }
     catch (err) {
       logger.error(err);
@@ -67,13 +67,13 @@ const getCartForUser = async(id)=> {
   }
 
 const AddProdToCart = async (userId, prodId) => {
-  console.log(prodId);    
+  
   let prod = await productRepository.getById(prodId);
 
   let carritoActual = await cartRepository.getCartForUser(userId);
     
     if (carritoActual) {
-      let updatedCart = await cartRepository.updateCart(prod, carritoActual.id);
+      let updatedCart = await cartRepository.updateCart(prod[0], carritoActual.id);
     }
     else {
         var carrito = {userID: userId,

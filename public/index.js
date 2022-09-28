@@ -28,6 +28,10 @@ function renderProductos(data) {
     
     
 }
+function finalizarCarrito(id) {
+    alert(id);
+  }
+
 
 function addToCart(id){
     const Data = {
@@ -46,6 +50,7 @@ function addToCart(id){
     
   }
 
+ 
 function renderChat(data) {
     if (data.length> 0) { 
     const html = data.map((elem, index) => {

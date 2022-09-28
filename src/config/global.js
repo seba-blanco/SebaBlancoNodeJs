@@ -9,5 +9,7 @@ module.exports = {
   MAILFROM:process.env.MAILFROM,
   WHATSFROM:process.env.WHATSFROM,
   TWILIOACCOUNT_SID:process.env.TWILIOACCOUNT_SID,
-  TWILIOAUTH_TOKEN:process.env.TWILIOAUTH_TOKEN
+  TWILIOAUTH_TOKEN:process.env.TWILIOAUTH_TOKEN,
+  MAIL_USER:process.env.MAIL_USER, 
+  MAIL_PASS:process.env.MAIL_PASS
 }

@@ -9,6 +9,9 @@ const SecurityMiddleware = require("../middlewares/securityMiddleware");
 const cartRouter = Router();
 
 
+cartRouter.get('/', cartController.getCartForUser);
+
+cartRouter.get('/verCarrito', cartController.viewCartForUser);
 
 cartRouter.get('/:id/productos', cartController.getCarts);
 cartRouter.post('/productos/:id', cartController.AddProdToCart);

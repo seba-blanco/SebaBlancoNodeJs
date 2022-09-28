@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session')
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
+const {logger} = require('./src/utils/logger4');
 
 
 const parseArgs = require('minimist');
@@ -30,9 +31,11 @@ const randomRouter = require('./src/routes/RandomRouter');
 const {passport} = require('./src/config/passport-config');
 const prodRouter = require('./src/routes/ProductRouter');
 const cartRouter = require('./src/routes/CartRouter');
+const orderRouter = require('./src/routes/OrderRouter');
 
 const { EXPIRATION_TIME } = require('./src/config/global')
 const {SocketManager} = require('./src/routes/IORouter');
+const orderRepository = require('./src/repositories/orderRepository');
 
 
 app.use(session({
@@ -58,6 +61,7 @@ app.use("/", loginRouter);
 app.use("/api/", randomRouter);
 app.use("/api/productos", prodRouter);
 app.use("/api/carrito", cartRouter);
+app.use("/api/orders", orderRouter);
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
@@ -70,7 +74,7 @@ if (SERVER_MODE =='FORK') {
         console.log('SERVER ON en http://localhost:' + PORT);
     
     });
-    httpServer.on("Error", (error) => console.log(`error en servidor ${error}`));
+    httpServer.on("Error", (error) => logger.error(error));
 }
 else {
     if (cluster.isMaster) {
