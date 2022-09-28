@@ -22,34 +22,35 @@
         <div>
           
           <h3>tu pedido</h3>  
+          <% if(Carrito){ %>
 
-          <% Carrito.prods.forEach(function(prod) { %>
+            <% Carrito.prods.forEach(function(prod) { %>
 
-                <div className='d-flex d-row'>
-                                                        
-                    <div>
-                        <span className="title">Nombre:<%= prod.name %></span>
-                        
-                        <p><b>Price: <%= prod.price %></b></p> 
-
-                        <p><b>description: <%= prod.description %></b></p> 
-
-                        <p><b>cantidad: <%= prod.stock %></b></p> 
-                    </div>
+                    <div className='d-flex d-row'>
+                                                            
+                        <div>
+                            <span className="title">Nombre:<%= prod.name %></span>
                             
-                </div>   
+                            <p><b>Price: <%= prod.price %></b></p> 
+
+                            <p><b>description: <%= prod.description %></b></p> 
+
+                            <p><b>cantidad: <%= prod.stock %></b></p> 
+                        </div>
+                                
+                    </div>   
                 <% }); %>  
-            
+
+                <form action="/api/orders/" method="POST">
+                    <input type="submit" value="comprar">
+        
+                </form>
+            <% }%>
             
             
 
         </div>
-        <form action="/api/orders/" method="POST">
-            <input type="submit" value="comprar">
-
-        </form>
-        <!-- <input type="submit" value="comprar" onclick="finalizarCarrito('<%= Carrito.id %>')"> -->
-
+       
         
         
     <!-- </main> -->

@@ -21,6 +21,11 @@ class ChatsDAOMongo extends MongoDBContainer{
     this.save(obj, this.id);
     this.id++;
   }
+
+  getChatByEmail = async (email) => {
+    let chats =await this.model.find({email: email});
+    return chats;
+  }
   
   
 

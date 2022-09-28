@@ -1,3 +1,5 @@
+//repository con operaciones CRUD que habla con el daos a traves de DTO.
+
 const {cartsDAO} = require("../DAOS/defaultDaos");
 const cartDTO = require ("../DTO/cartDTO")
 

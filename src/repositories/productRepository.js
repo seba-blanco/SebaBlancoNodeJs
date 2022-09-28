@@ -1,3 +1,4 @@
+//repository con operaciones CRUD que habla con el daos a traves de DTO.
 const {productsDAO} = require("../DAOS/defaultDaos");
 const productDTO = require ("../DTO/productDTO")
 

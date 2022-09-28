@@ -1,5 +1,8 @@
+// consume el cart service que habla con el repository.
+
 const cartService  = require ("../services/cartService")
 
+//trae todos los carritos o uno por ID.
 const getCarts = async (req,res) => {
     try {
         let id = req.params.id;
@@ -19,6 +22,7 @@ const getCarts = async (req,res) => {
 
 }
 
+//crea un carrito
 const createCart = async (req, res) => {
     try {
         const newProd  = await cartService.createCart(req.body);
@@ -34,6 +38,7 @@ const createCart = async (req, res) => {
     }
 }
 
+//actualiza el carrito
 const updateCart = async (req, res) => {
     try {
         const id = req.params.id;
@@ -50,6 +55,8 @@ const updateCart = async (req, res) => {
     }
 }
 
+
+//eliminta el carrito
 const deleteCart = async (req, res) => {
     try {
         let id = req.params.id;
@@ -67,6 +74,8 @@ const deleteCart = async (req, res) => {
     }
 }
 
+
+//elimina producto del carrito
 const deleteProdInCart = async(req, res) => {
     try {
         const id = req.params.id;
@@ -86,6 +95,7 @@ const deleteProdInCart = async(req, res) => {
     }
 }
 
+//agrega producto al carrito
 const AddProdToCart = async (req, res) => {
     try {
         let userId = req.user.id;
@@ -102,6 +112,7 @@ const AddProdToCart = async (req, res) => {
     }
 }
 
+//devuelve el carrito de un usuario
 const getCartForUser = async (req, res) => {
     try {
 
@@ -120,8 +131,9 @@ const getCartForUser = async (req, res) => {
         })  
     }
 }
-    
- const viewCartForUser = async (req, res) => {
+
+//esta funcion esta hecha para que devuelva la pagina del carrito.
+const viewCartForUser = async (req, res) => {
     try {
 
         const id = req.user.id;

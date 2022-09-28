@@ -1,6 +1,7 @@
 const orderService  = require ("../services/orderService")
 const cartService  = require ("../services/cartService")
 
+//recupera las ordenedes generadas
 const getOrders = async (req,res) => {
     try {
         let id = req.user.id;
@@ -20,6 +21,7 @@ const getOrders = async (req,res) => {
 
 }
 
+//craea una orden para la vista.
 const createOrder = async (req, res) => {
     try {
         const newProd  = await orderService.createOrder(req.user);

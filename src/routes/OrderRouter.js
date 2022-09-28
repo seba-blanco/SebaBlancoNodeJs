@@ -8,8 +8,6 @@ const orderController = require('../controllers/orderController');
 const SecurityMiddleware = require("../middlewares/securityMiddleware");
 const orderRouter = Router();
 
-
-// productsRouter.get('/', orderController.getProducts);
 orderRouter.get('/:id?', SecurityMiddleware, orderController.getOrders);
 
 

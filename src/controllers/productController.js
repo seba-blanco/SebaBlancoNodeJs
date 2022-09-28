@@ -1,5 +1,7 @@
+//consume el serivce que habla con el repository.
 const productService  = require ("../services/productService")
 
+//todas las funciones CRUD para producto.
 const getProducts = async (req,res) => {
     try {
         let id = req.params.id;

@@ -1,6 +1,4 @@
-// ------------------------------------------------------------------------------
-//  ROUTING
-// ------------------------------------------------------------------------------
+//aca se manenja todas las interacciones del login / signup.
 const parseArgs = require('minimist');
 const numCPUs = require("os").cpus().length;
 const log4js = require('log4js');
@@ -30,17 +28,17 @@ info = (req, res) => {
     
 }
 
-function getRoot(req, res) {
-    res.render('pages/login');
-}
+// function getRoot(req, res) {
+//     res.render('pages/login');
+// }
 
-function getLogin(req, res) {
-    if (req.isAuthenticated()) {
-        res.redirect('profile')
-    } else {
-        res.render('login');
-    }
-}
+// function getLogin(req, res) {
+//     if (req.isAuthenticated()) {
+//         res.redirect('profile')
+//     } else {
+//         res.render('login');
+//     }
+// }
 
 function getSignup(req, res) {
     res.render('pages/Signup');

@@ -1,3 +1,5 @@
+//todo el manejo para el chat esta aca.
+
 const util = require('util')
 const {chatsDAO} = require("../DAOS/defaultDaos");
 const productService  = require ("../services/productService");

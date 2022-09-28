@@ -66,6 +66,8 @@ const getCartForUser = async(id)=> {
     
   }
 
+
+  //esto es una negrada para que funcione la interfaz visual. en una llamada comun deberia entrar por el update cart.
 const AddProdToCart = async (userId, prodId) => {
   
   let prod = await productRepository.getById(prodId);

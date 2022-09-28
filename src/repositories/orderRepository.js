@@ -1,4 +1,5 @@
-const { company } = require("faker/lib/locales/az");
+//repository con operaciones CRUD que habla con el daos a traves de DTO.
+
 const {ordersDAO} = require("../DAOS/defaultDaos");
 const orderDTO = require ("../DTO/orderDTO")
 

@@ -1,3 +1,4 @@
+//setea todos los DAOS y segun la configuracion expone el que se va a usar.
 let { DEFAULTSTORE } = require('../config/global')
 
 const {ProductsDAOFile} =  require('../DAOS/products/ProductsDAOFile');

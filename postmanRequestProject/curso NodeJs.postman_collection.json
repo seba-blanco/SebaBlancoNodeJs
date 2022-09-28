@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "d6a66bfe-b0f6-4c3c-9d84-17dce90118c1",
 		"name": "curso NodeJs",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7886792"
 	},
 	"item": [
 		{
@@ -316,6 +317,48 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "chats",
+			"item": [
+				{
+					"name": "get chats",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get chat por mail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/chats/sope.blanco@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"chats",
+								"sope.blanco@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "simple test",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
